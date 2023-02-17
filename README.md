@@ -10,3 +10,6 @@
 ## Thực hành
 - Các bài lab lý thuyết được lưu trữ tại  [tại đây](./LT/)
 - branch `master` lưu trữ các bài lab đã hoàn thành
+# Issues
+- Nếu có bất kỳ vấn đề gì thầy/cô có thể đặt câu hỏi cho em [tại đây](https://github.com/trongtinh7727/CNJAVA/issues)
+ # Em xin cảm ơn
