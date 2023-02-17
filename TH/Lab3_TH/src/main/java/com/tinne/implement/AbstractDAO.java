@@ -79,7 +79,7 @@ public abstract class AbstractDAO<T> implements genericDAO<T> {
         }catch (HibernateException e) {
             if(tx != null)
                 tx.rollback();
-            e.printStackTrace();
+//            e.printStackTrace();
             return false;
         } finally {
             session.close();
@@ -118,8 +118,6 @@ public abstract class AbstractDAO<T> implements genericDAO<T> {
         }
     }
 
-
-
     public boolean remove(T t) {
         Session session=AbstractDAO.getFactory().openSession();
         Transaction tx = null;
@@ -137,5 +135,15 @@ public abstract class AbstractDAO<T> implements genericDAO<T> {
         } finally {
             session.close();
         }
+    }
+
+   public  void   print(List<T> list) {
+        System.out.println("\n============ BEGIN ============ ");
+        try {
+            list.forEach(System.out::println);
+        } catch (NullPointerException e) {
+            System.out.println("Null");
+        }
+        System.out.println("============ END ============ \n");
     }
 }

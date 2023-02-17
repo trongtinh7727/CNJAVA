@@ -5,10 +5,10 @@ import java.util.List;
 
 
 @Entity
-@Table(name="Manufacture")
+@Table(name="manufacture")
 public class Manufacture implements Serializable{
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     private String name;
     private String location;
@@ -16,6 +16,16 @@ public class Manufacture implements Serializable{
 
     @OneToMany(mappedBy = "manufacture")//mặc định fetch = FetchType.LAZY
     private List<Phone> phones;//1 khai bào list product
+
+    public Manufacture() {
+    }
+
+    public Manufacture(String id, String name, String location, int employee) {
+        this.id = id;
+        this.name = name;
+        this.location = location;
+        this.employee = employee;
+    }
 
     public String getId() {
         return id;
@@ -55,5 +65,10 @@ public class Manufacture implements Serializable{
 
     public void setProducts(List<Phone> products) {
         this.phones = products;
+    }
+
+    @Override
+    public String toString() {
+        return String.format("%s\t%s\t%s\t%d\n",id,name,location,employee);
     }
 }
