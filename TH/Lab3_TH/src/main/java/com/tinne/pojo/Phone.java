@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name="MobilePhone")
+@Table(name="mobilephone")
 public class Phone implements Serializable {
 
         @Id
@@ -77,14 +77,7 @@ public class Phone implements Serializable {
 
         @Override
         public String toString() {
-                return "Phone{" +
-                        "id='" + id + '\'' +
-                        ", name='" + name + '\'' +
-                        ", price=" + price +
-                        ", color='" + color + '\'' +
-                        ", country='" + country + '\'' +
-                        ", quantity=" + quantity +
-                        '}';
+                return String.format("%s\t%s\t%d\t%s\t%s\t%d\n",id,name,price,color,country,quantity);
         }
 
         public int getQuantity() {
