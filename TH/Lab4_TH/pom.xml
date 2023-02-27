@@ -2,18 +2,35 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.iiex</groupId>
-  <artifactId>lab5_LT</artifactId>
+  <artifactId>Lab4_TH</artifactId>
   <packaging>war</packaging>
+  <version>1.0-SNAPSHOT</version>
+  <name>Lab4_TH Maven Webapp</name>
+  <url>http://maven.apache.org</url>
+
   <properties>
     <maven.compiler.source>19</maven.compiler.source>
     <maven.compiler.target>19</maven.compiler.target>
+    <gson.version>2.10.1</gson.version>
+    <commons-fileupload.version>1.5</commons-fileupload.version>
   </properties>
-  <version>1.0-SNAPSHOT</version>
-  <name>lab5_LT Maven Webapp</name>
-  <url>http://maven.apache.org</url>
+
   <dependencies>
 
-    <!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+    <!-- https://mvnrepository.com/artifact/commons-fileupload/commons-fileupload -->
+    <dependency>
+      <groupId>commons-fileupload</groupId>
+      <artifactId>commons-fileupload</artifactId>
+      <version>${commons-fileupload.version}</version>
+    </dependency>
+
+
+    <dependency>
+      <groupId>com.google.code.gson</groupId>
+      <artifactId>gson</artifactId>
+      <version>${gson.version}</version>
+    </dependency>
+
     <dependency>
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
@@ -37,7 +54,7 @@
     </dependency>
   </dependencies>
   <build>
-    <finalName>lab5_LT</finalName>
+    <finalName>Lab4_TH</finalName>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
