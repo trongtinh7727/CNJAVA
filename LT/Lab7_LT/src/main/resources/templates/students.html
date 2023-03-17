@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!--<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">-->
+<head>
+  <title>Danh sách sản phẩm</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body style="background-color: #f8f8f8">
+
+<div class="container-fluid p-5">
+  <div class="row mb-5">
+    <div class="col-md-6">
+      <h3>Student Management</h3>
+    </div>
+    <div class="col-md-6 text-right">
+
+
+    </div>
+  </div>
+  <div class="row rounded border p-3">
+    <div class="col-md-4">
+      <h4 class="text-success">Thêm sinh viên mới</h4>
+      <form class="mt-3" method="post"  th:action="@{students/save}" th:object="${student}">
+        <div class="form-group">
+          <label for="firstname">Họ và tên đệm</label>
+          <input class="form-control" type="text" placeholder="Nhập họ và tên đệm" id="firstname" th:field="*{firstname}">
+        </div>
+        <div class="form-group">
+          <label for="lastname">Tên</label>
+          <input class="form-control" type="text" placeholder="Nhập tên" id="lastname" th:field="*{lastname}">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input class="form-control" type="email" placeholder="Nhập Email" id="email" th:field="*{email}">
+        </div>
+        <div class="form-group">
+          <button class="btn btn-success mr-2">Thêm sinh viên</button>
+        </div>
+        <div class="alert alert-success" role="alert"
+             th:if="${message}">
+          <span th:text="${message}"></span>
+        </div>
+        <div class="alert alert-danger" th:if="${error}">
+          <span th:text="${message}"></span>
+        </div>
+      </form>
+    </div>
+    <div class="col-md-8">
+      <h4 class="text-success">Danh sách sinh viên</h4>
+      <table class="table table-striped">
+        <thead>
+        <tr>
+          <th>STT</th>
+          <th>Firstname</th>
+          <th>Lastname</th>
+          <th>Email</th>
+          <th>Thao tác</th>
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="student : ${studentList}">
+        <tr>
+            <td>[[${student.id}]]</td>
+            <td>[[${student.firstname}]]</td>
+            <td>[[${student.lastname}]]</td>
+            <td>[[${student.email}]]</td>
+            <td>
+              <button type="button" class="btn btn-danger delete" th:data-id="${student.id}" onclick="confirmRemoval(this)"> Delete
+              </button>
+            </td>
+        </tr>
+        </th:block>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="confirm-removal-modal" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p>Bạn có chắc chắn muốn xóa  <strong id="producer-name"></strong>?</p>
+      </div>
+      <div class="modal-footer">
+
+        <a id="a-delete" href="">Xóa</a>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Không</button>
+      </div>
+    </div>
+
+  </div>
+</div><!-- Confirm Removel modal -->
+<script>
+  $(document).ready(function ()  {
+    // Add the following code if you want the name of the file appear on select
+    $(".custom-file-input").on("change", function() {
+      var fileName = $(this).val().split("\\").pop();
+      $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+  });
+  function confirmRemoval(btn) {
+    let tds = $(btn).closest('tr').find('td')
+    document.getElementById("producer-name").innerHTML = tds[1].innerText+ " " + tds[2].innerText;
+    // $('#delete-button').attr('uid', tds[0].innerHTML);
+    $('#confirm-removal-modal').modal({ show: true });
+    $("#a-delete").attr("href","students/delete/" + tds[0].innerText);
+  }
+</script>
+</body>
